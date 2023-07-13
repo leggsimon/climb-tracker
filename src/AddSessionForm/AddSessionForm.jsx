@@ -33,41 +33,42 @@ export const AddSessionForm = ({ onAddSession }) => {
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
-			<label class={styles.label} htmlFor='location'>
-				Location
-				<input
-					type='text'
+			<div className={styles.addSessionHeader}>
+				<select
+					className={styles.select}
+					name='location'
 					id='location'
-					defaultValue={newSession.location}
 					onChange={(e) => {
-						setNewSession({ ...newSession, location: e.target.value });
+						console.log(e.target.value);
 					}}
-				/>
-			</label>
-			<label class={styles.label} htmlFor='date'>
-				Date
-				<input
-					type='date'
-					id='date'
-					defaultValue={newSession.date}
-					onChange={(e) => {
-						setNewSession({ ...newSession, date: e.target.value });
-					}}
-				/>
-			</label>
-			<label class={styles.label} htmlFor='blue'>
+				>
+					<option selected>Berta Block</option>
+				</select>
+				<label htmlFor='date'>
+					<span className={styles.visuallyHidden}>Date</span>
+					<input
+						type='date'
+						id='date'
+						defaultValue={newSession.date}
+						onChange={(e) => {
+							setNewSession({ ...newSession, date: e.target.value });
+						}}
+					/>
+				</label>
+			</div>
+			<label className={`${styles.label} ${styles.blue}`} htmlFor='blue'>
 				Blue
 				<input type='number' id='blue' inputmode='numeric' />
 			</label>
-			<label class={styles.label} htmlFor='green'>
+			<label className={`${styles.label} ${styles.green}`} htmlFor='green'>
 				Green
 				<input type='number' id='green' inputmode='numeric' />
 			</label>
-			<label class={styles.label} htmlFor='yellow'>
+			<label className={`${styles.label} ${styles.yellow}`} htmlFor='yellow'>
 				Yellow
 				<input type='number' id='yellow' inputmode='numeric' />
 			</label>
-			<label class={styles.label} htmlFor='white'>
+			<label className={`${styles.label} ${styles.white}`} htmlFor='white'>
 				White
 				<input type='number' id='white' inputmode='numeric' />
 			</label>
