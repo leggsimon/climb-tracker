@@ -1,17 +1,25 @@
+import { useState } from 'react';
+import * as styles from './AddSessionForm.module.css';
+
 export const AddSessionForm = ({ onAddSession }) => {
+	const [newSession, setNewSession] = useState({
+		location: 'Berta Block',
+		date: new Date().toISOString().slice(0, 10),
+		completedGrades: [],
+	});
+	const today = new Date();
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const form = event.target;
-		const location = form.elements.location.value;
-		const date = form.elements.date.value;
+
 		const blue = form.elements.blue.value;
 		const green = form.elements.green.value;
 		const yellow = form.elements.yellow.value;
 		const white = form.elements.white.value;
 
 		const session = {
-			location,
-			date,
+			location: newSession.location,
+			date: newSession.date,
 			completedGrades: [
 				{ grade: 'Blue', amount: blue },
 				{ grade: 'Green', amount: green },
@@ -24,20 +32,48 @@ export const AddSessionForm = ({ onAddSession }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor='location'>Location</label>
-			<input type='text' id='location' />
-			<label htmlFor='date'>Date</label>
-			<input type='date' id='date' />
-			<label htmlFor='blue'>Blue</label>
-			<input type='number' id='blue' />
-			<label htmlFor='green'>Green</label>
-			<input type='number' id='green' />
-			<label htmlFor='yellow'>Yellow</label>
-			<input type='number' id='yellow' />
-			<label htmlFor='white'>White</label>
-			<input type='number' id='white' />
-			<button type='submit'>Add Session</button>
+		<form className={styles.form} onSubmit={handleSubmit}>
+			<label class={styles.label} htmlFor='location'>
+				Location
+				<input
+					type='text'
+					id='location'
+					defaultValue={newSession.location}
+					onChange={(e) => {
+						setNewSession({ ...newSession, location: e.target.value });
+					}}
+				/>
+			</label>
+			<label class={styles.label} htmlFor='date'>
+				Date
+				<input
+					type='date'
+					id='date'
+					defaultValue={newSession.date}
+					onChange={(e) => {
+						setNewSession({ ...newSession, date: e.target.value });
+					}}
+				/>
+			</label>
+			<label class={styles.label} htmlFor='blue'>
+				Blue
+				<input type='number' id='blue' inputmode='numeric' />
+			</label>
+			<label class={styles.label} htmlFor='green'>
+				Green
+				<input type='number' id='green' inputmode='numeric' />
+			</label>
+			<label class={styles.label} htmlFor='yellow'>
+				Yellow
+				<input type='number' id='yellow' inputmode='numeric' />
+			</label>
+			<label class={styles.label} htmlFor='white'>
+				White
+				<input type='number' id='white' inputmode='numeric' />
+			</label>
+			<button className={styles.button} type='submit'>
+				Add Session
+			</button>
 		</form>
 	);
 };

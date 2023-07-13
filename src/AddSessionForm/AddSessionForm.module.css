@@ -1,0 +1,15 @@
+.form {
+
+	display: flex;
+	flex-direction: column;
+
+}
+
+.label {
+	margin-block: 0.5em;
+}
+
+.button {
+	height: 2em;
+	padding: 1.5em;
+}
