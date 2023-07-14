@@ -25,14 +25,14 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	font-size: 1.5em;
+	font-size: 1.125em;
 	border: none;
 	background-color: transparent;
 	padding-left: 0;
 }
 
 .label {
-	margin-block: 0.5em;
+	padding-block: 0.2em;
 	padding-left: 10px;
 	position: relative;
 	display: flex;
@@ -75,7 +75,23 @@
 }
 
 .white{
-	--grade-color: #ffffff;
+	--grade-color: #eee;
+}
+
+.textInput {
+	font-size: 1.125em;
+	border: 1px solid #eee;
+	background-color: transparent;
+	/* padding-left: 0; */
+
+}
+
+.incrementButton {
+	font-size: 1.5em;
+	/* border: none; */
+	border: 1px solid black;
+	background-color: #007bff;
+	color: white
 }
 
 .button {
@@ -83,6 +99,11 @@
 	font-size: 1.125em;
 	height: 2.5em;
 	padding-block: 5px;
+	background-color: #3478f6;
+font-weight: 600;
+	color: white;
+	border: none;
+	border-radius: 5px;
 }
 
 

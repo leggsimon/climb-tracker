@@ -1,0 +1,64 @@
+.container {}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.heading {
+	font-size: 1.5rem;
+	font-weight: 500;
+	margin-top: 0;
+	margin-bottom: 0.5em;
+}
+
+.date {}
+
+.list {
+	padding: 0;
+	list-style: none;
+}
+
+.listItem {
+	padding-left: 10px;
+	position: relative;
+}
+
+.listItem::before {
+	width: 5px;
+	height: 100%;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: var(--grade-color)
+}
+
+.black{
+	--grade-color: #000000;
+}
+
+.purple{
+	--grade-color: #6f42c1;
+}
+
+.red{
+	--grade-color: #dc3545;
+}
+
+.blue{
+	--grade-color: #007bff;
+}
+
+.green{
+	--grade-color: #28a745;
+}
+
+.yellow{
+	--grade-color: #ffc107;
+}
+
+.white{
+	--grade-color: #eee;
+}

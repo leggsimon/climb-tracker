@@ -1,20 +1,22 @@
+import * as styles from './SessionEntry.module.css';
+
 export const SessionEntry = ({ session }) => {
 	return (
-		<li>
-			<div>
-				<h3>{session.location}</h3>
-				<span>
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<h3 className={styles.heading}>{session.location}</h3>
+				<span className={styles.date}>
 					<time>{session.date}</time>
 				</span>
 			</div>
-			<ul>
+			<ul className={styles.list}>
 				{session.completedGrades.map((grade) => (
-					<li>
+					<li className={`${styles.listItem} ${styles[grade.grade.toLowerCase()]}`}>
 						<span>{grade.grade}:</span>
 						<span>{grade.amount}</span>
 					</li>
 				))}
 			</ul>
-		</li>
+		</div>
 	);
 };

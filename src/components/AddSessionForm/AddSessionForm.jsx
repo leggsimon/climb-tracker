@@ -7,7 +7,7 @@ export const AddSessionForm = ({ onAddSession }) => {
 		date: new Date().toISOString().slice(0, 10),
 		completedGrades: [],
 	});
-	const today = new Date();
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -47,6 +47,7 @@ export const AddSessionForm = ({ onAddSession }) => {
 				<label htmlFor='date'>
 					<span className={styles.visuallyHidden}>Date</span>
 					<input
+						className={styles.date}
 						type='date'
 						id='date'
 						defaultValue={newSession.date}
@@ -56,21 +57,22 @@ export const AddSessionForm = ({ onAddSession }) => {
 					/>
 				</label>
 			</div>
+
 			<label className={`${styles.label} ${styles.blue}`} htmlFor='blue'>
 				Blue
-				<input type='number' id='blue' inputmode='numeric' />
+				<input type='number' id='blue' inputmode='numeric' className={styles.textInput} />
 			</label>
 			<label className={`${styles.label} ${styles.green}`} htmlFor='green'>
 				Green
-				<input type='number' id='green' inputmode='numeric' />
+				<input type='number' id='green' inputmode='numeric' className={styles.textInput} />
 			</label>
 			<label className={`${styles.label} ${styles.yellow}`} htmlFor='yellow'>
 				Yellow
-				<input type='number' id='yellow' inputmode='numeric' />
+				<input type='number' id='yellow' inputmode='numeric' className={styles.textInput} />
 			</label>
 			<label className={`${styles.label} ${styles.white}`} htmlFor='white'>
 				White
-				<input type='number' id='white' inputmode='numeric' />
+				<input type='number' id='white' inputmode='numeric' className={styles.textInput} />
 			</label>
 			<button className={styles.button} type='submit'>
 				Add Session
