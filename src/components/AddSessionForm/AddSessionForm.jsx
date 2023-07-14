@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import * as styles from './AddSessionForm.module.css';
 
 export const AddSessionForm = ({ onAddSession }) => {
@@ -18,6 +19,7 @@ export const AddSessionForm = ({ onAddSession }) => {
 		const white = form.elements.white.value;
 
 		const session = {
+			id: uuidv4(),
 			location: newSession.location,
 			date: newSession.date,
 			completedGrades: [

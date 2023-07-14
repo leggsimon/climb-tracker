@@ -7,7 +7,7 @@ export const SessionsList = ({ sessions }) => {
 			<h2 className={styles.heading}>Previous Sessions</h2>
 			<ul className={styles.list}>
 				{sessions.map((session) => (
-					<li className={styles.listItem}>
+					<li key={session.id} className={styles.listItem}>
 						<SessionEntry session={session} />
 					</li>
 				))}
