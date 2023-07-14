@@ -30,11 +30,34 @@ export function App() {
 		setSessions([session, ...sessions]);
 	};
 
+	const clearAllSessions = () => {
+		if (window.confirm('Are you sure you want to delete all sessions?')) {
+			setSessions([]);
+		}
+	};
+
+	const deleteSession = (id) => {
+		if (window.confirm('Are you sure you want to delete this session?')) {
+			setSessions(sessions.filter((session) => session.id !== id));
+		}
+	};
+
 	return (
 		<main className={styles.main}>
-			<h1>Session Tracker</h1>
+			<div className={styles.header}>
+				<button
+					className={styles.button}
+					onClick={(e) => {
+						e.preventDefault();
+						clearAllSessions();
+					}}
+				>
+					🚮
+				</button>
+				<h1>Session Tracker</h1>
+			</div>
 			<AddSessionForm onAddSession={addSession} />
-			<SessionsList sessions={sessions} />
+			<SessionsList sessions={sessions} deleteSessionHandler={deleteSession} />
 		</main>
 	);
 }

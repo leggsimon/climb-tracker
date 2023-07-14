@@ -4,13 +4,29 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 0.5em;
+}
+
+.headingContainer {
+	display: flex;
+	align-items: center;
+}
+
+.deleteButton {
+	font-size: 1.125em;
+	height: 2.5em;
+	padding: 10px;
+	background-color: transparent;
+	font-weight: 600;
+	color: white;
+	border: none;
+	border-radius: 5px;
 }
 
 .heading {
 	font-size: 1.5rem;
 	font-weight: 500;
-	margin-top: 0;
-	margin-bottom: 0.5em;
+	margin: 0;
 }
 
 .date {}
