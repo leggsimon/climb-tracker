@@ -88,14 +88,14 @@ export const AddSessionForm = ({ onAddSession }) => {
 			{gym.grades.map((grade) => (
 				<label
 					className={styles.label}
-					style={{ '--grade-color': grade.color }}
+					style={{ '--grade-color': grade.color } as React.CSSProperties}
 					htmlFor={grade.id}
 				>
 					{grade.name}
 					<input
 						type='number'
 						id={grade.id}
-						inputmode='numeric'
+						inputMode='numeric'
 						className={styles.textInput}
 						defaultValue={0}
 						value={completedGrades[grade.id]}
