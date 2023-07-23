@@ -1,7 +1,12 @@
 import { SessionEntry } from '../SessionEntry/SessionEntry';
 import * as styles from './SessionsList.module.css';
 
-export const SessionsList = ({ sessions, deleteSessionHandler }) => {
+interface SessionsListProps {
+	sessions: Session[];
+	deleteSessionHandler: (id: Session['id']) => void;
+}
+
+export const SessionsList = ({ sessions, deleteSessionHandler }: SessionsListProps) => {
 	return (
 		<>
 			<h2 className={styles.heading}>Previous Sessions</h2>

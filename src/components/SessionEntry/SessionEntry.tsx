@@ -1,6 +1,11 @@
 import * as styles from './SessionEntry.module.css';
 
-export const SessionEntry = ({ session, deleteSessionHandler }) => {
+interface SessionEntryProps {
+	session: Session;
+	deleteSessionHandler: (id: Session['id']) => void;
+}
+
+export const SessionEntry = ({ session, deleteSessionHandler }: SessionEntryProps) => {
 	const handleDelete = (event) => {
 		event.preventDefault();
 		deleteSessionHandler(session.id);

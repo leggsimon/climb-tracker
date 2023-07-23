@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import * as styles from './AddSessionForm.module.css';
 
-const GYMS = [
+const GYMS: Gym[] = [
 	{
-		name: 'Berta Block',
 		id: 'berta-block',
+		name: 'Berta Block',
 		grades: [
 			{ id: 'black', name: 'Black', color: '#000000' },
 			{ id: 'purple', name: 'Purple', color: '#6f42c1' },
@@ -17,10 +17,14 @@ const GYMS = [
 	},
 ];
 
-export const AddSessionForm = ({ onAddSession }) => {
+interface AddSessionFormProps {
+	onAddSession: (session: Session) => void;
+}
+
+export const AddSessionForm = ({ onAddSession }: AddSessionFormProps) => {
 	const [gym, setGym] = useState(GYMS[0]);
 	const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-	const [completedGrades, setCompletedGrades] = useState(
+	const [completedGrades, setCompletedGrades] = useState<Record<Grade['id'], number>>(
 		gym.grades.reduce((acc, grade) => {
 			acc[grade.id] = 0;
 			return acc;
@@ -88,20 +92,19 @@ export const AddSessionForm = ({ onAddSession }) => {
 			{gym.grades.map((grade) => (
 				<label
 					className={styles.label}
-					style={{ '--grade-color': grade.color }}
+					style={{ '--grade-color': grade.color } as React.CSSProperties}
 					htmlFor={grade.id}
 				>
 					{grade.name}
 					<input
 						type='number'
 						id={grade.id}
-						inputmode='numeric'
+						inputMode='numeric'
 						className={styles.textInput}
-						defaultValue={0}
-						value={completedGrades[grade.id]}
+						defaultValue={completedGrades[grade.id]}
 						onChange={(e) => {
 							setCompletedGrades((prev) => {
-								return { ...prev, [grade.id]: e.target.value };
+								return { ...prev, [grade.id]: Number(e.target.value) };
 							});
 						}}
 					/>
