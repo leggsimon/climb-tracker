@@ -101,8 +101,7 @@ export const AddSessionForm = ({ onAddSession }: AddSessionFormProps) => {
 						id={grade.id}
 						inputMode='numeric'
 						className={styles.textInput}
-						defaultValue={0}
-						value={completedGrades[grade.id]}
+						defaultValue={completedGrades[grade.id]}
 						onChange={(e) => {
 							setCompletedGrades((prev) => {
 								return { ...prev, [grade.id]: Number(e.target.value) };
