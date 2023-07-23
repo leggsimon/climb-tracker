@@ -36,12 +36,14 @@ export const SessionEntry = ({ session, deleteSessionHandler }: SessionEntryProp
 				</span>
 			</div>
 			<ul className={styles.list}>
-				{session.completedGrades.map((grade) => (
-					<li className={`${styles.listItem} ${styles[grade.grade.toLowerCase()]}`}>
-						<span>{grade.grade}:</span>
-						<span>{grade.amount}</span>
-					</li>
-				))}
+				{session.completedGrades
+					.filter((grade) => Number(grade.amount) > 0)
+					.map((grade) => (
+						<li className={`${styles.listItem} ${styles[grade.grade.toLowerCase()]}`}>
+							<span>{grade.grade}:</span>
+							<span>{grade.amount}</span>
+						</li>
+					))}
 			</ul>
 		</div>
 	);
