@@ -5,11 +5,17 @@ interface SessionEntryProps {
 	deleteSessionHandler: (id: Session['id']) => void;
 }
 
+const dateStringToDate = (dateString: string) => {
+	const [year, month, day] = dateString.split('-');
+	return new Date(Number(year), Number(month) - 1, Number(day));
+};
+
 export const SessionEntry = ({ session, deleteSessionHandler }: SessionEntryProps) => {
 	const handleDelete = (event) => {
 		event.preventDefault();
 		deleteSessionHandler(session.id);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -20,7 +26,13 @@ export const SessionEntry = ({ session, deleteSessionHandler }: SessionEntryProp
 					<h3 className={styles.heading}>{session.location}</h3>
 				</div>
 				<span className={styles.date}>
-					<time>{session.date}</time>
+					<time>
+						{dateStringToDate(session.date).toLocaleString(undefined, {
+							year: '2-digit',
+							month: 'short',
+							day: 'numeric',
+						})}
+					</time>
 				</span>
 			</div>
 			<ul className={styles.list}>
