@@ -50,10 +50,12 @@ export const AddSessionForm = ({ onAddSession }: AddSessionFormProps) => {
 			location: gym.name,
 			date,
 			completedGrades: [
-				...gym.grades.map((grade) => ({
-					grade: grade.name,
-					amount: completedGrades[grade.id],
-				})),
+				...gym.grades
+					.map((grade) => ({
+						grade: grade.name,
+						amount: completedGrades[grade.id],
+					}))
+					.filter((grade) => grade.amount > 0),
 			],
 		};
 
@@ -110,7 +112,11 @@ export const AddSessionForm = ({ onAddSession }: AddSessionFormProps) => {
 					/>
 				</label>
 			))}
-			<button className={styles.button} type='submit'>
+			<button
+				className={styles.button}
+				type='submit'
+				disabled={Object.values(completedGrades).every((grade) => grade === 0)}
+			>
 				Add Session
 			</button>
 		</form>
