@@ -24,9 +24,9 @@ const data = [
 ];
 
 export function App() {
-	const [sessions, setSessions] = useLocalStorageState([], 'climbing-sessions');
+	const [sessions, setSessions] = useLocalStorageState<Session[]>([], 'climbing-sessions');
 
-	const addSession = (session) => {
+	const addSession = (session: Session) => {
 		setSessions([session, ...sessions]);
 	};
 
@@ -36,7 +36,7 @@ export function App() {
 		}
 	};
 
-	const deleteSession = (id) => {
+	const deleteSession = (id: Session['id']) => {
 		if (window.confirm('Are you sure you want to delete this session?')) {
 			setSessions(sessions.filter((session) => session.id !== id));
 		}
