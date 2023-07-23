@@ -2,35 +2,59 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import * as styles from './AddSessionForm.module.css';
 
+const GYMS = [
+	{
+		name: 'Berta Block',
+		id: 'berta-block',
+		grades: [
+			{ id: 'black', name: 'Black', color: '#000000' },
+			{ id: 'purple', name: 'Purple', color: '#6f42c1' },
+			{ id: 'blue', name: 'Blue', color: '#007bff' },
+			{ id: 'green', name: 'Green', color: '#28a745' },
+			{ id: 'yellow', name: 'Yellow', color: '#ffc107' },
+			{ id: 'white', name: 'White', color: '#eeeeee' },
+		],
+	},
+];
+
 export const AddSessionForm = ({ onAddSession }) => {
-	const [newSession, setNewSession] = useState({
-		location: 'Berta Block',
-		date: new Date().toISOString().slice(0, 10),
-		completedGrades: [],
-	});
+	const [gym, setGym] = useState(GYMS[0]);
+	const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+	const [completedGrades, setCompletedGrades] = useState(
+		gym.grades.reduce((acc, grade) => {
+			acc[grade.id] = 0;
+			return acc;
+		}, {}),
+	);
+
+	const resetSession = () => {
+		setGym(GYMS[0]);
+		setDate(new Date().toISOString().slice(0, 10));
+		setCompletedGrades(
+			gym.grades.reduce((acc, grade) => {
+				acc[grade.id] = 0;
+				return acc;
+			}, {}),
+		);
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const form = event.target;
-
-		const blue = form.elements.blue.value;
-		const green = form.elements.green.value;
-		const yellow = form.elements.yellow.value;
-		const white = form.elements.white.value;
 
 		const session = {
 			id: uuidv4(),
-			location: newSession.location,
-			date: newSession.date,
+			location: gym.name,
+			date,
 			completedGrades: [
-				{ grade: 'Blue', amount: blue },
-				{ grade: 'Green', amount: green },
-				{ grade: 'Yellow', amount: yellow },
-				{ grade: 'White', amount: white },
+				...gym.grades.map((grade) => ({
+					grade: grade.name,
+					amount: completedGrades[grade.id],
+				})),
 			],
 		};
 
 		onAddSession(session);
+		resetSession();
 	};
 
 	return (
@@ -52,30 +76,37 @@ export const AddSessionForm = ({ onAddSession }) => {
 						className={styles.date}
 						type='date'
 						id='date'
-						defaultValue={newSession.date}
+						defaultValue={date}
 						onChange={(e) => {
-							setNewSession({ ...newSession, date: e.target.value });
+							e.preventDefault();
+							setDate(e.target.value);
 						}}
 					/>
 				</label>
 			</div>
 
-			<label className={`${styles.label} ${styles.blue}`} htmlFor='blue'>
-				Blue
-				<input type='number' id='blue' inputmode='numeric' className={styles.textInput} />
-			</label>
-			<label className={`${styles.label} ${styles.green}`} htmlFor='green'>
-				Green
-				<input type='number' id='green' inputmode='numeric' className={styles.textInput} />
-			</label>
-			<label className={`${styles.label} ${styles.yellow}`} htmlFor='yellow'>
-				Yellow
-				<input type='number' id='yellow' inputmode='numeric' className={styles.textInput} />
-			</label>
-			<label className={`${styles.label} ${styles.white}`} htmlFor='white'>
-				White
-				<input type='number' id='white' inputmode='numeric' className={styles.textInput} />
-			</label>
+			{gym.grades.map((grade) => (
+				<label
+					className={styles.label}
+					style={{ '--grade-color': grade.color }}
+					htmlFor={grade.id}
+				>
+					{grade.name}
+					<input
+						type='number'
+						id={grade.id}
+						inputmode='numeric'
+						className={styles.textInput}
+						defaultValue={0}
+						value={completedGrades[grade.id]}
+						onChange={(e) => {
+							setCompletedGrades((prev) => {
+								return { ...prev, [grade.id]: e.target.value };
+							});
+						}}
+					/>
+				</label>
+			))}
 			<button className={styles.button} type='submit'>
 				Add Session
 			</button>
